@@ -3,52 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İMPARATOR MALİ</title>
+    <title>İsim ve Seçim</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-            background-color: #f4f4f4;
-        }
-        .container {
-            background: white;
+            margin: 20px;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
         }
-        #result {
-            font-size: 24px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
-            font-weight: bold;
         }
-        button {
-            padding: 10px 20px;
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        #question {
+            margin-top: 20px;
+        }
+        #response {
+            margin-top: 20px;
             font-size: 18px;
-            border: none;
-            background-color: #007BFF;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Mali gaymi</h1>
-        <button onclick="rastgeleCevap()">Sor!</button>
-        <div id="result"></div>
+    <h2>Hoş geldiniz!</h2>
+    <p>Adınızı girin:</p>
+    <input type="text" id="name" placeholder="Adınızı buraya yazın">
+    <button onclick="askQuestion()">Gönder</button>
+
+    <div id="question" style="display:none;">
+        <p>Merhaba <span id="userName"></span>, size bir soru soracağım: <br> Bu siteyi beğendiniz mi?</p>
+        <button onclick="answer('Evet')">Evet</button>
+        <button onclick="answer('Hayır')">Hayır</button>
     </div>
-    
+
+    <div id="response"></div>
+
+    <h3>Yanıtlar:</h3>
+    <table id="responsesTable">
+        <thead>
+            <tr>
+                <th>İsim</th>
+                <th>Cevap</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
     <script>
-        function rastgeleCevap() {
-            const cevaplar = ["Evet", "Hacı onayladı","KESİNLİKLE"];
-            const rastgeleSecim = cevaplar[Math.floor(Math.random() * cevaplar.length)];
-            document.getElementById("result").innerText = rastgeleSecim;
+        // Tabloya veri ekleyen fonksiyon
+        function updateTable(name, response) {
+            var table = document.getElementById("responsesTable").getElementsByTagName('tbody')[0];
+            var row = table.insertRow();
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            cell1.innerHTML = name;
+            cell2.innerHTML = response;
+        }
+
+        // Kullanıcı adı ve yanıtı işleyen fonksiyon
+        function askQuestion() {
+            var name = document.getElementById("name").value;
+            if (name) {
+                document.getElementById("userName").innerText = name;
+                document.getElementById("question").style.display = "block";
+                document.getElementById("response").innerText = "";
+            } else {
+                alert("Lütfen isminizi girin.");
+            }
+        }
+
+        // Yanıt seçme ve tabloya ekleme fonksiyonu
+        function answer(response) {
+            var name = document.getElementById("name").value;
+            if (name) {
+                updateTable(name, response);
+                document.getElementById("response").innerText = `${name}, cevabınızı verdiniz: ${response}`;
+                document.getElementById("question").style.display = "none";
+                document.getElementById("name").value = "";  // İsmi temizle
+            }
         }
     </script>
 </body>
