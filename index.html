@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İMPARATOR MALİ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        #result {
+            font-size: 24px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mali gaymi</h1>
+        <button onclick="rastgeleCevap()">Sor!</button>
+        <div id="result"></div>
+    </div>
+    
+    <script>
+        function rastgeleCevap() {
+            const cevaplar = ["Evet", "Hacı onayladı","KESİNLİKLE"];
+            const rastgeleSecim = cevaplar[Math.floor(Math.random() * cevaplar.length)];
+            document.getElementById("result").innerText = rastgeleSecim;
+        }
+    </script>
+</body>
+</html>
